@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KYANOS — Moda Minimalista Egea</title>
+
+  <!-- Fuentes de Google: Playfair Display (Elegancia Serif) e Inter (Sans-Serif Limpia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================
+       VARIABLES Y PALETA DE COLORES (GRIEGA)
+       ========================================== */
+    :root {
+      --deep-mediterranean: #0B1D3A;
+      --aegean-cyan: #2A7B9B;
+      --aegean-cyan-light: #EBF4F8;
+      --off-white: #F8F6F0;
+      --sand-beige: #E6DFD3;
+      --pure-white: #FFFFFF;
+      --text-main: #1C252C;
+      --text-muted: #6C7A89;
+      --border-color: #E2E8F0;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Inter', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--off-white);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================
+       TIPOGRAFÍA Y ESTILOS GENERALES
+       ========================================== */
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: var(--font-sans);
+      transition: var(--transition);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ==========================================
+       HEADER & NAVEGACIÓN
+       ========================================== */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(248, 246, 240, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      letter-spacing: 0.25em;
+      color: var(--deep-mediterranean);
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-main);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--aegean-cyan);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .icon-btn {
+      background: none;
+      position: relative;
+      font-size: 1.2rem;
+      color: var(--deep-mediterranean);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: var(--aegean-cyan);
+      color: var(--pure-white);
+      font-size: 0.7rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .admin-toggle-btn {
+      border: 1px solid var(--deep-mediterranean);
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--deep-mediterranean);
+      border-radius: 2px;
+    }
+
+    .admin-toggle-btn:hover {
+      background-color: var(--deep-mediterranean);
+      color: var(--pure-white);
+    }
+
+    /* ==========================================
+       HERO SECTION
+       ========================================== */
+    .hero {
+      position: relative;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(11,29,58,0.3) 0%, rgba(11,29,58,0.5) 100%), 
+                  url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      color: var(--pure-white);
+      margin-bottom: 5rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .hero-subtitle-greek {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+      color: var(--sand-beige);
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background-color: var(--pure-white);
+      color: var(--deep-mediterranean);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      border: 1px solid var(--pure-white);
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--pure-white);
+    }
+
+    /* ==========================================
+       CATÁLOGO DE PRODUCTOS
+       ========================================== */
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      color: var(--deep-mediterranean);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 6rem;
+    }
+
+    .product-card {
+      background: var(--pure-white);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    }
+
+    .product-image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 130%; /* Aspect Ratio 4:5 */
+      overflow: hidden;
+      background-color: var(--sand-beige);
+    }
+
+    .product-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.04);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--deep-mediterranean);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 2px;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--deep-mediterranean);
+    }
+
+    .product-price {
+      font-weight: 500;
+      color: var(--aegean-cyan);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .product-card-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-outline {
+      width: 100%;
+      padding: 0.75rem;
+      background: transparent;
+      border: 1px solid var(--deep-mediterranean);
+      color: var(--deep-mediterranean);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--deep-mediterranean);
+      color: var(--pure-white);
+    }
+
+    .sold-out-tag {
+      color: #D9534F;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    /* ==========================================
+       SECCIÓN IDENTIDAD / REDES
+       ========================================== */
+    .brand-identity {
+      background-color: var(--deep-mediterranean);
+      color: var(--pure-white);
+      padding: 5rem 0;
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .brand-identity h3 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--sand-beige);
+    }
+
+    .brand-identity p {
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .social-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--pure-white);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .social-link-btn:hover {
+      border-color: var(--sand-beige);
+      color: var(--sand-beige);
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    /* ==========================================
+       CARRITO LATERAL (SLIDE-OUT CART)
+       ========================================== */
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .cart-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      background: var(--pure-white);
+      z-index: 201;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+    }
+
+    .cart-sidebar.active {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h3 {
+      color: var(--deep-mediterranean);
+      font-size: 1.3rem;
+    }
+
+    .close-btn {
+      background: none;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+    }
+
+    .cart-items {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-item-img {
+      width: 70px;
+      height: 90px;
+      object-fit: cover;
+    }
+
+    .cart-item-details {
+      flex-grow: 1;
+    }
+
+    .cart-item-title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      color: var(--deep-mediterranean);
+    }
+
+    .cart-item-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0.2rem 0 0.5rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.9rem;
+      color: var(--aegean-cyan);
+      font-weight: 500;
+    }
+
+    .remove-item {
+      background: none;
+      color: #D9534F;
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      text-decoration: underline;
+    }
+
+    .cart-footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--off-white);
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      color: var(--deep-mediterranean);
+      font-weight: 600;
+    }
+
+    .btn-checkout {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--deep-mediterranean);
+      color: var(--pure-white);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.8rem;
+    }
+
+    .btn-checkout:hover {
+      background-color: var(--aegean-cyan);
+    }
+
+    /* ==========================================
+       MODAL DETALLE DE PRODUCTO
+       ========================================== */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      padding: 1rem;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: var(--pure-white);
+      max-width: 800px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 100%;
+      min-height: 350px;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .size-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .size-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      font-size: 0.8rem;
+    }
+
+    .size-btn.selected, .size-btn:hover {
+      border-color: var(--deep-mediterranean);
+      background-color: var(--deep-mediterranean);
+      color: var(--pure-white);
+    }
+
+    /* ==========================================
+       PANEL DE ADMINISTRACIÓN (MODAL/PANEL)
+       ========================================== */
+    .admin-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--off-white);
+      z-index: 400;
+      display: none;
+      overflow-y: auto;
+      padding: 2rem 0;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--sand-beige);
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+    }
+
+    .admin-form {
+      background: var(--pure-white);
+      padding: 2rem;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+    }
+
+    .admin-table-container {
+      background: var(--pure-white);
+      padding: 2rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .admin-table th, .admin-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.85rem;
+    }
+
+    .admin-table th {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .action-btn-sm {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      margin-right: 0.3rem;
+    }
+
+    .btn-edit { background: var(--sand-beige); color: var(--text-main); }
+    .btn-delete { background: #D9534F; color: white; }
+
+    /* ==========================================
+       FOOTER Y REDES FLOTANTES
+       ========================================== */
+    footer {
+      background-color: var(--deep-mediterranean);
+      color: var(--pure-white);
+      padding: 3rem 0 1.5rem;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-copy {
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-size: 0.75rem;
+    }
+
+    .floating-socials {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 90;
+    }
+
+    .floating-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: var(--deep-mediterranean);
+      color: var(--pure-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: var(--transition);
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px);
+      background-color: var(--aegean-cyan);
+    }
+
+    /* ANIMACIONES & RESPONSIVE */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+      .modal-content { grid-template-columns: 1fr; }
+      .modal-img { height: 250px; }
+      .admin-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">KYANOS</a>
+      <ul class="nav-links">
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#nosotros">Sobre Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="admin-toggle-btn" onclick="toggleAdminPanel()">Modo Admin 🔒</button>
+        <button class="icon-btn" onclick="toggleCart()">
+          🛒 <span class="cart-badge" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-subtitle-greek">Η ΜΕΛΑΓΧΟΛΙΑ ΤΟΥ ΑΙΓΑΙΟΥ</p>
+      <h1 class="hero-title">Elegancia Atemporal Inspirada en el Egeo</h1>
+      <a href="#catalogo" class="btn-primary">Explorar Colección</a>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO DE PRODUCTOS -->
+  <section class="container" id="catalogo">
+    <div class="section-title">
+      <h2>Nuestra Colección</h2>
+      <p>Piezas minimalistas de corte clásico</p>
+    </div>
+    <div class="products-grid" id="products-container">
+      <!-- Los productos se cargan dinámicamente -->
+    </div>
+  </section>
+
+  <!-- SECCIÓN SOBRE NOSOTROS Y REDES -->
+  <section class="brand-identity" id="nosotros">
+    <div class="container">
+      <h3>El Espíritu de Kyanos</h3>
+      <p>Nacida bajo el sol del Mediterráneo, Kyanos fusiona la pureza arquitectónica de las Cícladas con el diseño contemporáneo. Cada prenda está pensada para perdurar, elaborada con materiales nobles e inspirada en los tonos profundos del mar y la arena.</p>
+      <div class="social-links">
+        <a href="https://instagram.com/kyanosropa" target="_blank" class="social-link-btn">Instagram @kyanosropa</a>
+        <a href="https://tiktok.com/@kyanosropa" target="_blank" class="social-link-btn">TikTok @kyanosropa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDES SOCIALES FLOTANTES -->
+  <div class="floating-socials">
+    <a href="https://instagram.com/kyanosropa" target="_blank" class="floating-btn" title="Instagram">IG</a>
+    <a href="https://tiktok.com/@kyanosropa" target="_blank" class="floating-btn" title="TikTok">TK</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo" style="color: var(--pure-white);">KYANOS</div>
+        <div style="display: flex; gap: 2rem;">
+          <a href="https://instagram.com/kyanosropa" target="_blank">Instagram</a>
+          <a href="https://tiktok.com/@kyanosropa" target="_blank">TikTok</a>
+        </div>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 KYANOS. Todos los derechos reservados. Diseño Minimalista Egeo.
+      </div>
+    </div>
+  </footer>
+
+  <!-- CARRITO LATERAL (SLIDE-OUT CART) -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h3>Tu Carrito</h3>
+      <button class="close-btn" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- Items agregados del carrito -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cart-total-price">$0.00</span>
+      </div>
+      <button class="btn-checkout" onclick="checkout()">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <!-- MODAL VISTA DETALLADA -->
+  <div class="modal" id="product-modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()" style="position: absolute; top: 15px; right: 20px; z-index: 10;">&times;</button>
+      <img src="" id="modal-img" class="modal-img" alt="Producto">
+      <div class="modal-body">
+        <h3 id="modal-title" style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--deep-mediterranean);"></h3>
+        <p id="modal-price" style="font-size: 1.2rem; color: var(--aegean-cyan); font-weight: 500;"></p>
+        <p id="modal-desc" style="margin: 1rem 0; color: var(--text-muted); font-size: 0.9rem;"></p>
+        <div>
+          <label style="font-size: 0.8rem; text-transform: uppercase;">Seleccionar Talle:</label>
+          <div class="size-selector" id="modal-sizes">
+            <!-- Talles -->
+          </div>
+        </div>
+        <button class="btn-primary" style="background-color: var(--deep-mediterranean); color: white; width: 100%; text-align: center; margin-top: 1rem;" id="modal-add-btn">Añadir al Carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL DE ADMINISTRACIÓN -->
+  <div class="admin-panel" id="admin-panel">
+    <div class="container">
+      <div class="admin-header">
+        <h2>Panel de Control — Administrador KYANOS</h2>
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn-outline" style="width: auto; padding: 0.5rem 1rem;" onclick="logoutAdmin()">Cerrar Sesión</button>
+          <button class="btn-outline" style="width: auto; padding: 0.5rem 1rem; background-color: var(--deep-mediterranean); color: white;" onclick="closeAdminPanel()">Volver a la Tienda</button>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <!-- FORMULARIO AGREGAR / EDITAR -->
+        <div class="admin-form">
+          <h3 id="form-title" style="margin-bottom: 1.5rem;">Agregar Nuevo Producto</h3>
+          <form id="product-form" onsubmit="handleFormSubmit(event)">
+            <input type="hidden" id="edit-id">
+            <div class="form-group">
+              <label>Nombre de la prenda</label>
+              <input type="text" id="prod-title" class="form-control" required placeholder="Ej. Túnica Egea Linen">
+            </div>
+            <div class="form-group">
+              <label>Precio ($)</label>
+              <input type="number" id="prod-price" class="form-control" required placeholder="85.00">
+            </div>
+            <div class="form-group">
+              <label>URL de la Imagen</label>
+              <input type="url" id="prod-image" class="form-control" required placeholder="https://images.unsplash.com/...">
+            </div>
+            <div class="form-group">
+              <label>Etiqueta / Categoría Griega</label>
+              <input type="text" id="prod-tag" class="form-control" placeholder="Ej. Edición Olimpo / 100% Lino">
+            </div>
+            <div class="form-group">
+              <label>Talles disponibles (separados por coma)</label>
+              <input type="text" id="prod-sizes" class="form-control" placeholder="S, M, L, XL" value="S, M, L">
+            </div>
+            <div class="form-group">
+              <label>Descripción</label>
+              <textarea id="prod-desc" class="form-control" rows="3" placeholder="Descripción detallada de la prenda..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Disponibilidad</label>
+              <select id="prod-stock" class="form-control">
+                <option value="true">En Stock</option>
+                <option value="false">Agotado</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary" style="background-color: var(--deep-mediterranean); color: white; width: 100%; border: none;">Guardar Producto</button>
+          </form>
+        </div>
+
+        <!-- TABLA DE PRODUCTOS -->
+        <div class="admin-table-container">
+          <h3 style="margin-bottom: 1.5rem;">Inventario Actual</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <!-- Carga dinámica -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT / LÓGICA DE LA APLICACIÓN -->
+  <script>
+    // CONTRASEÑA DE ADMINISTRADOR (Puedes cambiarla aquí)
+    const ADMIN_PASSWORD = "kyanos2026";
+    let isAdminAuthenticated = false;
+
+    // PRODUCTOS INICIALES POR DEFECTO
+    const initialProducts = [
+      {
+        id: 1,
+        title: "Remera Oversize 'Astraea'",
+        price: 45.00,
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+        tag: "100% Algodón Egeo",
+        sizes: ["S", "M", "L", "XL"],
+        description: "Remera minimalista de confección pesada en algodón premiun. Inspirada en la sobriedad del mármol clásico.",
+        inStock: true
+      },
+      {
+        id: 2,
+        title: "Buzo 'Olympos' Azul Profundo",
+        price: 89.00,
+        image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80",
+        tag: "Colección Mediterránea",
+        sizes: ["S", "M", "L"],
+        description: "Buzo de abrigo ligero en color azul marino profundo. Un tributo al tono del mar Egeo al atardecer.",
+        inStock: true
+      },
+      {
+        id: 3,
+        title: "Camisa de Lino 'Atenas'",
+        price: 75.00,
+        image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=80",
+        tag: "Lino Griego Natural",
+        sizes: ["M", "L", "XL"],
+        description: "Camisa holgada en lino beige arena. Frescura e intransigente elegancia para climas cálidos.",
+        inStock: true
+      }
+    ];
+
+    // ESTADO GLOBAL
+    let products = JSON.parse(localStorage.getItem('kyanos_products')) || initialProducts;
+    let cart = JSON.parse(localStorage.getItem('kyanos_cart')) || [];
+    let selectedSize = '';
+
+    // GUARDAR EN LOCALSTORAGE
+    function saveData() {
+      localStorage.setItem('kyanos_products', JSON.stringify(products));
+      localStorage.setItem('kyanos_cart', JSON.stringify(cart));
+    }
+
+    // RENDERIZAR TIENDA
+    function renderProducts() {
+      const container = document.getElementById('products-container');
+      container.innerHTML = '';
+
+      products.forEach(prod => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-image-container">
+            <img src="${prod.image}" alt="${prod.title}" class="product-image">
+            ${prod.tag ? `<span class="product-badge">${prod.tag}</span>` : ''}
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${prod.title}</h3>
+            <div class="product-price">$${Number(prod.price).toFixed(2)}</div>
+            ${prod.inStock ? 
+              `<div class="product-card-actions">
+                <button class="btn-outline" onclick="openModal(${prod.id})">Ver Detalle</button>
+               </div>` : 
+              `<div class="sold-out-tag">Agotado</div>`
+            }
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ABRIR MODAL
+    function openModal(id) {
+      const prod = products.find(p => p.id === id);
+      if(!prod) return;
+
+      document.getElementById('modal-img').src = prod.image;
+      document.getElementById('modal-title').innerText = prod.title;
+      document.getElementById('modal-price').innerText = `$${Number(prod.price).toFixed(2)}`;
+      document.getElementById('modal-desc').innerText = prod.description;
+
+      const sizeContainer = document.getElementById('modal-sizes');
+      sizeContainer.innerHTML = '';
+      selectedSize = prod.sizes[0] || '';
+
+      prod.sizes.forEach((size, index) => {
+        const btn = document.createElement('button');
+        btn.className = `size-btn ${index === 0 ? 'selected' : ''}`;
+        btn.innerText = size;
+        btn.onclick = () => {
+          document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedSize = size;
+        };
+        sizeContainer.appendChild(btn);
+      });
+
+      const addBtn = document.getElementById('modal-add-btn');
+      addBtn.onclick = () => {
+        addToCart(prod.id, selectedSize);
+        closeModal();
+      };
+
+      document.getElementById('product-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('product-modal').classList.remove('active');
+    }
+
+    // CARRITO DE COMPRAS
+    function toggleCart() {
+      document.getElementById('cart-sidebar').classList.toggle('active');
+      document.getElementById('cart-overlay').classList.toggle('active');
+    }
+
+    function addToCart(id, size) {
+      const prod = products.find(p => p.id === id);
+      const existing = cart.find(item => item.id === id && item.size === size);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: prod.id,
+          title: prod.title,
+          price: prod.price,
+          image: prod.image,
+          size: size,
+          quantity: 1
+        });
+      }
+      saveData();
+      updateCartUI();
+      toggleCart();
+    }
+
+    function removeFromCart(id, size) {
+      cart = cart.filter(item => !(item.id === id && item.size === size));
+      saveData();
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+      let total = 0;
+      let itemCount = 0;
+
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        itemCount += item.quantity;
+
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <img src="${item.image}" class="cart-item-img">
+          <div class="cart-item-details">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-meta">Talle: ${item.size} | Cantidad: ${item.quantity}</div>
+            <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+            <button class="remove-item" onclick="removeFromCart(${item.id}, '${item.size}')">Eliminar</button>
+          </div>
+        `;
+        container.appendChild(cartItem);
+      });
+
+      document.getElementById('cart-count').innerText = itemCount;
+      document.getElementById('cart-total-price').innerText = `$${total.toFixed(2)}`;
+    }
+
+    function checkout() {
+      if(cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+      alert("¡Gracias por tu compra en KYANOS! Tu pedido ha sido procesado con éxito.");
+      cart = [];
+      saveData();
+      updateCartUI();
+      toggleCart();
+    }
+
+    // PANEL DE ADMINISTRACIÓN CON AUTENTICACIÓN
+    function toggleAdminPanel() {
+      if (!isAdminAuthenticated) {
+        const passwordInput = prompt("Introduce la contraseña de administrador:");
+        if (passwordInput === ADMIN_PASSWORD) {
+          isAdminAuthenticated = true;
+          alert("Acceso concedido.");
+        } else if (passwordInput !== null) {
+          alert("Contraseña incorrecta. Acceso denegado.");
+          return;
+        } else {
+          return; // Si presiona cancelar
+        }
+      }
+
+      const panel = document.getElementById('admin-panel');
+      panel.classList.add('active');
+      renderAdminTable();
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('admin-panel').classList.remove('active');
+    }
+
+    function logoutAdmin() {
+      isAdminAuthenticated = false;
+      closeAdminPanel();
+      alert("Sesión de administrador cerrada.");
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('admin-table-body');
+      tbody.innerHTML = '';
+
+      products.forEach(prod => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><img src="${prod.image}" width="40" height="50" style="object-fit:cover;"></td>
+          <td><strong>${prod.title}</strong></td>
+          <td>$${Number(prod.price).toFixed(2)}</td>
+          <td>${prod.inStock ? 'En Stock' : 'Agotado'}</td>
+          <td>
+            <button class="action-btn-sm btn-edit" onclick="editProduct(${prod.id})">Editar</button>
+            <button class="action-btn-sm btn-delete" onclick="deleteProduct(${prod.id})">Eliminar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('edit-id').value;
+      const title = document.getElementById('prod-title').value;
+      const price = parseFloat(document.getElementById('prod-price').value);
+      const image = document.getElementById('prod-image').value;
+      const tag = document.getElementById('prod-tag').value;
+      const sizes = document.getElementById('prod-sizes').value.split(',').map(s => s.trim());
+      const description = document.getElementById('prod-desc').value;
+      const inStock = document.getElementById('prod-stock').value === "true";
+
+      if(id) {
+        // Editar
+        const index = products.findIndex(p => p.id === parseInt(id));
+        products[index] = { id: parseInt(id), title, price, image, tag, sizes, description, inStock };
+      } else {
+        // Crear
+        const newProduct = {
+          id: Date.now(),
+          title, price, image, tag, sizes, description, inStock
+        };
+        products.push(newProduct);
+      }
+
+      saveData();
+      renderProducts();
+      renderAdminTable();
+      resetForm();
+    }
+
+    function editProduct(id) {
+      const prod = products.find(p => p.id === id);
+      if(!prod) return;
+
+      document.getElementById('edit-id').value = prod.id;
+      document.getElementById('prod-title').value = prod.title;
+      document.getElementById('prod-price').value = prod.price;
+      document.getElementById('prod-image').value = prod.image;
+      document.getElementById('prod-tag').value = prod.tag || '';
+      document.getElementById('prod-sizes').value = prod.sizes.join(', ');
+      document.getElementById('prod-desc').value = prod.description;
+      document.getElementById('prod-stock').value = prod.inStock ? "true" : "false";
+
+      document.getElementById('form-title').innerText = "Editar Producto";
+    }
+
+    function deleteProduct(id) {
+      if(confirm("¿Estás seguro de que deseas eliminar esta prenda?")) {
+        products = products.filter(p => p.id !== id);
+        saveData();
+        renderProducts();
+        renderAdminTable();
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('product-form').reset();
+      document.getElementById('edit-id').value = '';
+      document.getElementById('form-title').innerText = "Agregar Nuevo Producto";
+    }
+
+    // INICIALIZACIÓN
+    renderProducts();
+    updateCartUI();
+  </script>
+</body>
+</html>
