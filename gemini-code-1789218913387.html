@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KYANOS | Tienda Oficial - Moda Egea Minimalista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #002B49; /* Azul Egeo */
+      --primary-hover: #001A2D;
+      --accent: #C5A059; /* Dorado */
+      --bg: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --text: #1C2430;
+      --text-muted: #6C757D;
+      --border: #E2E8F0;
+      --danger: #E53E3E;
+      --font-brand: 'Cinzel', serif;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
+    body { background-color: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    /* Top Announcement Bar */
+    .top-bar { background: var(--primary); color: #fff; text-align: center; padding: 9px 15px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px; display: flex; justify-content: center; align-items: center; gap: 15px; }
+    .top-bar span.highlight { background: var(--accent); color: #000; padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+
+    /* Header Principal */
+    header { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; }
+    
+    .logo { font-family: var(--font-brand); font-size: 1.8rem; font-weight: 700; letter-spacing: 5px; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .logo::after { content: "•"; color: var(--accent); font-size: 1.2rem; }
+
+    .nav-menu { display: flex; gap: 25px; list-style: none; }
+    .nav-menu a { text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-menu a:hover { color: var(--accent); }
+
+    .header-actions { display: flex; gap: 18px; align-items: center; }
+    .btn-action { background: none; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 4px; transition: background 0.2s; }
+    .btn-action:hover { background: #F1F5F9; }
+    .cart-badge { background: var(--accent); color: #000; font-size: 0.75rem; font-weight: 700; padding: 2px 7px; border-radius: 12px; }
+
+    /* Admin Bar */
+    .admin-bar { background: #000; color: #fff; padding: 8px 20px; font-size: 0.8rem; display: none; justify-content: space-between; align-items: center; }
+    .admin-bar.active { display: flex; }
+    .admin-bar button { background: var(--danger); color: white; border: none; padding: 4px 10px; border-radius: 3px; cursor: pointer; font-weight: 600; font-size: 0.75rem; }
+
+    /* Main Container */
+    .container { max-width: 1280px; margin: 0 auto; padding: 25px; }
+
+    /* Features Strip */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+    .feature-card { background: #fff; border: 1px solid var(--border); padding: 20px; border-radius: 6px; text-align: center; }
+    .feature-icon { font-size: 1.5rem; margin-bottom: 8px; color: var(--accent); }
+    .feature-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .feature-card p { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* Filter Bar */
+    .filter-strip { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 15px 20px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 25px; }
+    .filter-title { font-size: 1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+    .category-pills { display: flex; gap: 10px; }
+    .pill { background: #F1F5F9; border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .pill.active, .pill:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Product Grid */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .product-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.2s ease, transform 0.2s ease; cursor: pointer; }
+    .product-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.06); transform: translateY(-3px); }
+
+    .img-box { width: 100%; height: 340px; background: #EFEFEF; position: relative; overflow: hidden; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .badge-tag { position: absolute; top: 12px; left: 12px; background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .product-info { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .product-category { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+    .product-name { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+    .product-price { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+
+    .btn-add { background: var(--primary); color: white; border: none; padding: 11px; width: 100%; border-radius: 4px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: background 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+    .btn-add:hover { background: var(--accent); color: #000; }
+
+    /* Modal Detalle de Producto */
+    .product-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 250; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px); }
+    .product-modal.open { display: flex; }
+    .product-modal-box { background: #fff; width: 100%; max-width: 850px; border-radius: 8px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; position: relative; max-height: 90vh; }
+    .close-modal { position: absolute; top: 15px; right: 20px; border: none; background: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+
+    /* Carousel */
+    .carousel-container { position: relative; background: #000; height: 100%; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+    .carousel-img { width: 100%; height: 100%; object-fit: cover; max-height: 550px; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 1rem; color: var(--primary); z-index: 5; }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+    .carousel-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
+    .dot.active { background: #fff; width: 20px; border-radius: 4px; }
+
+    /* Product Details in Modal */
+    .modal-details { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
+    .modal-title { font-family: var(--font-brand); font-size: 1.5rem; color: var(--primary); margin-bottom: 5px; }
+    .modal-price { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+    .modal-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+
+    .size-selector { margin-bottom: 25px; }
+    .size-selector label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; color: var(--primary); }
+    .size-options { display: flex; gap: 10px; }
+    .size-btn { border: 1px solid var(--border); background: #fff; padding: 10px 16px; border-radius: 4px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+    .size-btn.selected, .size-btn:hover { border-color: var(--primary); background: var(--primary); color: #fff; }
+
+    /* Cart Drawer */
+    .cart-drawer { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.15); z-index: 200; transition: right 0.3s ease; padding: 20px; display: flex; flex-direction: column; }
+    .cart-drawer.open { right: 0; }
+    .cart-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 15px; }
+    .cart-head h3 { font-family: var(--font-brand); color: var(--primary); font-size: 1.1rem; }
+    .cart-items { flex-grow: 1; overflow-y: auto; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9; }
+    .cart-item-info h5 { font-size: 0.85rem; font-weight: 600; }
+    .cart-item-info p { font-size: 0.8rem; color: var(--text-muted); }
+    .btn-remove { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 0.8rem; font-weight: 600; }
+    .cart-foot { border-top: 1px solid var(--border); padding-top: 15px; margin-top: 10px; }
+    .cart-total-row { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; color: var(--primary); }
+    .btn-checkout { background: #25D366; color: white; border: none; padding: 14px; width: 100%; border-radius: 4px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; }
+
+    /* Footer */
+    footer { background: #fff; border-top: 1px solid var(--border); margin-top: 60px; padding: 40px 25px 20px; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+    .footer-col h5 { font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px; }
+    .footer-col p, .footer-col a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px; }
+    .footer-col a:hover { color: var(--primary); }
+    .social-btn { display: inline-flex; align-items: center; gap: 8px; background: #F1F5F9; padding: 8px 12px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; color: var(--primary) !important; margin-bottom: 8px; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 20px; text-align: center; font-size: 0.75rem; color: var(--text-muted); }
+
+    /* Admin Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 300; justify-content: center; align-items: center; }
+    .modal.open { display: flex; }
+    .modal-box { background: #fff; padding: 25px; border-radius: 6px; width: 90%; max-width: 400px; }
+    .field { margin-bottom: 12px; }
+    .field label { display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; }
+    .field input { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; }
+
+    @media (max-width: 768px) {
+      .product-modal-box { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
+      .carousel-container { height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Bar -->
+  <div id="adminBar" class="admin-bar">
+    <span> MODO ADMINISTRADOR ACTIVO</span>
+    <div>
+      <button onclick="openModal()" style="background:var(--primary); margin-right:8px;">+ Nuevo Producto</button>
+      <button onclick="toggleAdmin()">Salir</button>
+    </div>
+  </div>
+
+  <!-- Announcement Ribbon -->
+  <div class="top-bar">
+    <span class="highlight">NUEVA COLECCIÓN</span>
+    <span>ENVÍOS A TODO MONTEVIDEO • EFECTIVO Y TRANSFERENCIA</span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">KYANOS</a>
+      
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn-action" onclick="promptAdmin()">🔒 Admin</button>
+        <button class="btn-action" onclick="toggleCart()">
+          🛒 Carrito <span id="cartCount" class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="container">
+
+    <!-- Beneficios (Envíos MVD + Pagos) -->
+    <section class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h4>ENVÍOS EN MONTEVIDEO</h4>
+        <p>Entregas exclusivas en toda la zona de Montevideo.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💵</div>
+        <h4>MÉTODOS DE PAGO</h4>
+        <p>Aceptamos pago en Efectivo al entregar o Transferencia Bancaria.</p>
+      </div>
+    </section>
+
+    <!-- Barra de Filtro / Catálogo -->
+    <section id="catalogo">
+      <div class="filter-strip">
+        <div class="filter-title">CATÁLOGO DE PRENDAS</div>
+        <div class="category-pills">
+          <button class="pill active">Todos</button>
+          <button class="pill">Remeras</button>
+          <button class="pill">Novedades</button>
+        </div>
+      </div>
+
+      <!-- Grilla de Productos -->
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- Modal Detalle Producto & Carrusel -->
+  <div id="productModal" class="product-modal">
+    <div class="product-modal-box">
+      <button class="close-modal" onclick="closeProductModal()">✕</button>
+      
+      <!-- Carrusel -->
+      <div class="carousel-container">
+        <button class="carousel-btn prev" onclick="prevSlide()">❮</button>
+        <img id="carouselImg" class="carousel-img" src="" alt="Producto Kyanos">
+        <button class="carousel-btn next" onclick="nextSlide()">❯</button>
+        <div id="carouselDots" class="carousel-dots"></div>
+      </div>
+
+      <!-- Detalles y Selección -->
+      <div class="modal-details">
+        <div>
+          <h2 id="mTitle" class="modal-title">Grecia Map Tee</h2>
+          <div id="mPrice" class="modal-price">$ 600</div>
+          <p id="mDesc" class="modal-desc">
+            Remera de corte clásico confeccionada en 100% algodón de alta calidad. Presenta un estampado exclusivo inspirado en la cartografía de la Antigua Grecia, combinando sofisticación e historia egea.
+          </p>
+
+          <div class="size-selector">
+            <label>Seleccionar Talle:</label>
+            <div class="size-options">
+              <button class="size-btn" onclick="selectSize('S')">S</button>
+              <button class="size-btn selected" onclick="selectSize('M')">M</button>
+              <button class="size-btn" onclick="selectSize('L')">L</button>
+              <button class="size-btn" onclick="selectSize('XL')">XL</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-add" onclick="addModalProductToCart()">Agregar al Carrito con Talle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrito Lateral -->
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-head">
+      <h3>MI CARRITO DE COMPRA</h3>
+      <button class="btn-action" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="cart-total-row">
+        <span>TOTAL:</span>
+        <span>$<span id="cartTotal">0</span></span>
+      </div>
+      <button class="btn-checkout" onclick="sendWhatsApp()">Finalizar Compra por WhatsApp 📲</button>
+    </div>
+  </div>
+
+  <!-- Modal Admin -->
+  <div id="adminModal" class="modal">
+    <div class="modal-box">
+      <h3 style="margin-bottom:15px; color:var(--primary);">Agregar Producto</h3>
+      <div class="field"><label>Nombre del Producto</label><input type="text" id="pName"></div>
+      <div class="field"><label>Detalle / Material</label><input type="text" id="pTag" placeholder="Ej. 100% Algodón"></div>
+      <div class="field"><label>Precio ($ UYU)</label><input type="number" id="pPrice"></div>
+      <div class="field"><label>URL Imagen Directa</label><input type="text" id="pImg"></div>
+      <button class="btn-add" onclick="saveProduct()" style="margin-top:10px;">Guardar Producto</button>
+      <button class="btn-action" onclick="closeModal()" style="width:100%; text-align:center; margin-top:8px;">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacto">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h5>KYANOS ROPA</h5>
+        <p>Indumentaria inspirada en la simplicidad y la estética egea. Diseños atemporales para uso diario.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>CONTACTO Y AYUDA</h5>
+        <p>📱 WhatsApp: +598 98 133 841</p>
+        <p>📍 Envíos a todo Montevideo</p>
+        <p>💳 Pagos: Efectivo / Transferencia</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>REDES SOCIALES</h5>
+        <a href="https://tiktok.com/@kyanosropa" target="_blank" class="social-btn">
+          🎵 TikTok @kyanosropa
+        </a>
+        <a href="https://instagram.com/kyanosropa" target="_blank" class="social-btn">
+          📸 Instagram @kyanosropa
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2026 KYANOS ROPA • Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    // Enlaces a tus 6 fotos originales
+    const ORIGINAL_LINKS = [
+      "https://ibb.co/k6sccP8y",
+      "https://ibb.co/60ygzQDS",
+      "https://ibb.co/RpqpSWmt",
+      "https://ibb.co/DHg3DkZ9",
+      "https://ibb.co/5X6xDQh0",
+      "https://ibb.co/YCvHg33"
+    ];
+
+    function fixIbbUrl(url) {
+      if (!url) return 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600';
+      if (url.includes("i.ibb.co")) return url;
+      const code = url.split('/').pop();
+      return `https://i.ibb.co/${code}/image.jpg`;
+    }
+
+    const PRODUCT_IMAGES = ORIGINAL_LINKS.map(fixIbbUrl);
+
+    const OFFICIAL_PRODUCTS = [
+      { 
+        id: 1, 
+        name: "Grecia Map Tee", 
+        tag: "100% ALGODÓN • MAP PRINT",
+        price: 600, 
+        images: PRODUCT_IMAGES,
+        desc: "Remera confeccionada en 100% algodón de tacto suave. Diseño exclusivo 'Grecia Map' estampado en alta calidad. Corte regular súper cómodo y versátil."
+      }
+    ];
+
+    // Cargar productos del localStorage si existen
+    let storedProducts = null;
+    try {
+      storedProducts = JSON.parse(localStorage.getItem('kyanos_products'));
+    } catch(e) {
+      storedProducts = null;
+    }
+
+    let products = (storedProducts && storedProducts.length > 0) ? storedProducts : [...OFFICIAL_PRODUCTS];
+    let cart = [];
+    let isAdmin = false;
+    let selectedSize = 'M';
+    let currentSlide = 0;
+    let currentActiveProduct = null;
+
+    function init() { renderProducts(); }
+
+    function saveProductsToStorage() {
+      localStorage.setItem('kyanos_products', JSON.stringify(products));
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      
+      products.forEach(p => {
+        const coverImg = (p.images && p.images.length > 0) ? p.images[0] : fixIbbUrl(p.img);
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="img-box" onclick="openProductModal(${p.id})">
+            <span class="badge-tag">NUEVO</span>
+            <img src="${coverImg}" alt="${p.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600';">
+          </div>
+          <div class="product-info">
+            <div onclick="openProductModal(${p.id})">
+              <div class="product-category">${p.tag || 'LÍNEA BÁSICA'}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-price">$ ${p.price.toLocaleString()}</div>
+            </div>
+            <button class="btn-add" onclick="openProductModal(${p.id})">Ver / Elegir Talle</button>
+            ${isAdmin ? `<button onclick="deleteProduct(${p.id})" style="color:var(--danger); margin-top:8px; font-size:0.75rem; border:none; background:none; cursor:pointer; width:100%; text-align:center;">[ Eliminar ]</button>` : ''}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    /* Modal Producto & Carrusel */
+    function openProductModal(id) {
+      currentActiveProduct = products.find(p => p.id === id);
+      if (!currentActiveProduct) return;
+
+      document.getElementById('mTitle').innerText = currentActiveProduct.name;
+      document.getElementById('mPrice').innerText = `$ ${currentActiveProduct.price.toLocaleString()}`;
+      if (currentActiveProduct.desc) document.getElementById('mDesc').innerText = currentActiveProduct.desc;
+
+      currentSlide = 0;
+      updateCarousel();
+
+      document.getElementById('productModal').classList.add('open');
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('open');
+    }
+
+    function updateCarousel() {
+      if (!currentActiveProduct) return;
+      const imgs = currentActiveProduct.images || [fixIbbUrl(currentActiveProduct.img)];
+      const carouselImg = document.getElementById('carouselImg');
+      
+      carouselImg.src = imgs[currentSlide];
+      carouselImg.onerror = function() {
+        this.onerror = null;
+        this.src = 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600';
+      };
+
+      const dotsContainer = document.getElementById('carouselDots');
+      dotsContainer.innerHTML = '';
+      imgs.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${idx === currentSlide ? 'active' : ''}`;
+        dot.onclick = () => { currentSlide = idx; updateCarousel(); };
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function nextSlide() {
+      if (!currentActiveProduct) return;
+      const imgs = currentActiveProduct.images || [fixIbbUrl(currentActiveProduct.img)];
+      currentSlide = (currentSlide + 1) % imgs.length;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      if (!currentActiveProduct) return;
+      const imgs = currentActiveProduct.images || [fixIbbUrl(currentActiveProduct.img)];
+      currentSlide = (currentSlide - 1 + imgs.length) % imgs.length;
+      updateCarousel();
+    }
+
+    function selectSize(size) {
+      selectedSize = size;
+      document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.innerText === size);
+      });
+    }
+
+    function addModalProductToCart() {
+      if (!currentActiveProduct) return;
+      cart.push({
+        ...currentActiveProduct,
+        size: selectedSize
+      });
+      updateCart();
+      closeProductModal();
+      toggleCart(true);
+    }
+
+    /* Carrito */
+    function updateCart() {
+      document.getElementById('cartCount').innerText = cart.length;
+      const body = document.getElementById('cartItems');
+      body.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, idx) => {
+        total += item.price;
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+          <div class="cart-item-info">
+            <h5>${item.name} (Talle: ${item.size})</h5>
+            <p>$ ${item.price.toLocaleString()}</p>
+          </div>
+          <button class="btn-remove" onclick="removeFromCart(${idx})">Quitar</button>
+        `;
+        body.appendChild(row);
+      });
+
+      document.getElementById('cartTotal').innerText = total.toLocaleString();
+    }
+
+    function removeFromCart(idx) { cart.splice(idx, 1); updateCart(); }
+
+    function toggleCart(forceOpen = false) {
+      const drawer = document.getElementById('cartDrawer');
+      if (forceOpen) drawer.classList.add('open');
+      else drawer.classList.toggle('open');
+    }
+
+    /* Admin */
+    function promptAdmin() {
+      const pass = prompt("Contraseña de Administrador:");
+      if (pass === "kyanos2026") {
+        isAdmin = true;
+        document.getElementById('adminBar').classList.add('active');
+        renderProducts();
+      } else if (pass !== null) { alert("Contraseña incorrecta"); }
+    }
+
+    function toggleAdmin() {
+      isAdmin = false;
+      document.getElementById('adminBar').classList.remove('active');
+      renderProducts();
+    }
+
+    function openModal() { document.getElementById('adminModal').classList.add('open'); }
+    function closeModal() { document.getElementById('adminModal').classList.remove('open'); }
+
+    function saveProduct() {
+      const name = document.getElementById('pName').value;
+      const tag = document.getElementById('pTag').value;
+      const price = parseFloat(document.getElementById('pPrice').value);
+      const img = document.getElementById('pImg').value;
+
+      if (name && price) {
+        products.push({ 
+          id: Date.now(), 
+          name, 
+          tag, 
+          price, 
+          images: [fixIbbUrl(img)] 
+        });
+        saveProductsToStorage();
+        renderProducts();
+        closeModal();
+      }
+    }
+
+    function deleteProduct(id) {
+      products = products.filter(p => p.id !== id);
+      saveProductsToStorage();
+      renderProducts();
+    }
+
+    /* Mensaje de WhatsApp */
+    function sendWhatsApp() {
+      if (cart.length === 0) return alert("Tu carrito está vacío");
+      let msg = "Hola KYANOS, quiero realizar la compra de:\n\n";
+      let total = 0;
+      cart.forEach(item => {
+        msg += `• ${item.name} - Talle: ${item.size} ($${item.price.toLocaleString()})\n`;
+        total += item.price;
+      });
+      msg += `\nTotal a pagar: $${total.toLocaleString()}\n`;
+      msg += "\nMétodo de pago: (Efectivo / Transferencia)";
+      msg += "\nDirección de envío en Montevideo: ";
+      
+      const phone = "59898133841";
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    init();
+  </script>
+</body>
+</html>
